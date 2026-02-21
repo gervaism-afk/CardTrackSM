@@ -90,3 +90,25 @@ export function imageUrl(relPath: string, backendUrl: string): string {
 export async function health(backendUrl: string): Promise<{ok: boolean}> {
   return req(`${backendUrl}/health`);
 }
+
+
+// Cloudflare Pages Functions (no backend required for these)
+export type EbayImageItem = {
+  title: string;
+  price?: { value: string; currency: string } | null;
+  itemWebUrl?: string | null;
+  image?: { imageUrl?: string } | null;
+};
+
+export async function ebaySearchByImage(imageBase64: string): Promise<{items: EbayImageItem[]; suggestedPriceCad?: number | null;}> {
+  return req(`/api/ebay-search-by-image`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ imageBase64 }),
+  });
+}
+
+export async function ebaySoldUrl(q: string): Promise<{soldUrl: string}> {
+  const u = `/api/ebay-sold-url?q=${encodeURIComponent(q)}`;
+  return req(u);
+}
