@@ -178,8 +178,8 @@ useEffect(() => {
   const onCapture = async (blob: Blob) => {
     const ok = await validateBackend(backendUrl);
     if (!ok) return;
-    const file = fileFromBlob(blob
-      const ocr = await ocrExtract(file);, `card_${Date.now()}.jpg`);
+    const file = fileFromBlob(blob, `card_${Date.now()}.jpg`);
+      const ocr = await ocrExtract(file);
     setLastCapture(file);
     setBusy(true);
     try {
