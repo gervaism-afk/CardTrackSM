@@ -179,7 +179,7 @@ useEffect(() => {
     const ok = await validateBackend(backendUrl);
     if (!ok) return;
     const file = fileFromBlob(blob, `card_${Date.now()}.jpg`);
-      const ocr = await ocrExtract(file);
+    const ocr = await ocrExtract(file);
     setLastCapture(file);
     setBusy(true);
     try {
